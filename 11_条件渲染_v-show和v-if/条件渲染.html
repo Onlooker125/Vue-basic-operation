@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>当前的n值是：{{n}}</h2>
+        <button @click="n++">点我+n</button>
+        <!-- 使用频率高用v-show -->
+        <!-- v-show -->
+        <h2 v-show="n === 1">v-show:1</h2>
+        <h2 v-show="n === 2">v-show:2</h2>
+        <h2 v-show="n === 3">v-show:3</h2>
+        <!--  -->
+        <!-- v-if -->
+        <h2 v-if="n === 1">v-if:1</h2>
+        <h2 v-else-if="n === 2">v-if:2</h2>
+        <h2 v-else-if="n === 3">v-if:3</h2>
+        <h2 v-else>v-if:没有</h2>
+
+        <!-- template 与 v-if 的使用 -->
+        <template v-if="n === 2">
+            <h2>:1</h2>
+            <h2>:2</h2>
+            <h2>:3</h2>
+        </template>
+
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    n: 0,
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

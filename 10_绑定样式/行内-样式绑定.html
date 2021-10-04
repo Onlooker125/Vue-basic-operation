@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+    <style>
+        .class1 {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(34, 198, 219);
+        }
+
+        .class2 {
+            width: 200px;
+            height: 200px;
+            border: 3px solid red;
+        }
+
+        .class3 {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px
+        }
+
+        .class4 {
+            width: 200px;
+            height: 200px;
+            box-shadow: 0px 0px 50px rgb(0, 0, 0, .3);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 绑定行内的class样式--对象写法(常用) -->
+        <div class="class1" :style="inlineStyleObj">绑定方法1</div>
+        <br><br>
+        <!-- 绑定行内的class样式--数组写法(不常用),数组中采用对象形式 -->
+        <div class="class1" :style="inlineStyleArr">绑定方法2</div>
+        <br><br>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    inlineStyleObj: {
+                        fontSize: "60px",
+                        border: "2px solid gray"
+                    },
+                    inlineStyleArr: [
+                        {
+                            fontSize: "29px",
+                        }
+
+                    ]
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

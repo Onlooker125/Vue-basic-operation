@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="firstName"><br>
+        <input type="text" v-model="lastName"><br>
+        你的名字是: <span>{{ fullName }}</span>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    firstName: "张",
+                    lastName: "三"
+                }
+            },
+            // 计算属性computed
+            computed: {
+                fullName: {
+                    // get有什么作用？当有人读取了fullName时，get就会被调用，且返回值就作为fullName的值
+                    // get什么时候被调用？1.初次读取fullName时；2.所依赖的数据发生变化时
+                    get() {
+                        // 这里的this指向vm，也就是返回的fullName不会到_data里面去
+                        return this.firstName + "-" + this.lastName
+                    },
+                    // set什么时候被调用？当fullName被修改时
+                    set(value) {
+                        console.log(value);
+                        let arr = value.split("-")
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+                    }
+                },
+                // computed有个简写形式
+                // 当确定只读取不修改，也就是确定只使用get时，可以直接通过function返回
+                fullName:function(){  //也可以直接写成fullName(){}
+                // 这里的this指向vm，也就是返回的fullName不会到_data里面去
+                        return this.firstName + "-" + this.lastName
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

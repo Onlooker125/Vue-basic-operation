@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <!--
+        （1）常用的按键别名
+            1. 回车 ⇒ `enter`
+            2. 删除 ⇒ `delete` (捕获 “删除” 和 “退格” 键)
+            3. 退出 ⇒ `esc`
+            4. 空格 ⇒ `space`
+            5. 换行 ⇒ `tab`
+            6. 上 ⇒ `up`
+            7. 下 ⇒ `down`
+            8. 左 ⇒ `left`
+            9. 右 ⇒ `right` 
+        （2）Vue未提供别名的按键，可以使用按键原始的key值去绑定，但要注意转为kebab-case（短横线命名）
+        （3）系统修饰键（用法特殊）：ctrl,alt,shift,meta
+            1.配合keyup使用，按下修饰键的同时，再按下其他键，然后释放其他键，事件才会被触发
+            2.配合keydown使用：正常触发事件
+        （4）也可以使用keyCode去指定具体的按键
+        （5）vue.config.keyCodes.自定义键名 = 键码，可以去定制案件别名
+    -->
+    
+    <div id="app">
+        <!-- (1) -->
+        <h2>努力努力！！！</h2>
+        <input type="text" placeholder="按下回车提示信息" @keyup.enter="showInfo">
+        <br>
+        <!-- (2) -->
+        <!-- 例如要按下切换大小写CapsLock -->
+        <input type="text" placeholder="按下CapsLock提示信息" @keyup.caps-lock="showInfo">
+        <br>
+        <!-- (3) -->
+        <!-- 定制按键别名 -->
+        <input type="text" placeholder="按下回车提示信息" @keyup.huiche="showInfo">
+        <br>
+    </div>
+    <script>
+        Vue.config.keyCodes.huiche = 13;
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                showInfo(e) {
+                    console.log( e.target.value);
+
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

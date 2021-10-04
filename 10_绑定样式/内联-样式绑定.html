@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+    <style>
+        .class1{
+            width: 200px;
+            height: 200px;
+            background-color: rgb(34, 198, 219);
+        }
+        .class2{
+            width: 200px;
+            height: 200px;
+            border: 3px solid red;
+        }
+        .class3{
+            width: 200px;
+            height: 200px;
+            border-radius: 20px
+        }
+        .class4{
+            width: 200px;
+            height: 200px;
+            box-shadow: 0px 0px 50px rgb(0,0,0,.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+        <div class="class1" :class="class2">绑定方法1</div>
+        <br><br>
+        <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定、名字也不确定 -->
+        <div class="class1" :class="classArr">绑定方法2</div>
+        <br><br>
+        <!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用 -->
+        <div class="class1" :class="classObj">绑定方法3</div>
+        <br><br>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    // 字符串写法
+                    class2:"class2",
+                    // 数组写法，数组中的所有样式都会用到
+                    classArr:['class2','class3','class4'],  
+                    // 对象写法，true那个用哪个
+                    classObj:{
+                        class2:true,
+                        class3:false,
+                        class4:false,
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
