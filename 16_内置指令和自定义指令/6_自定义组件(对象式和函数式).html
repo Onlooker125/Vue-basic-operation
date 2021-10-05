@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .bgc {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        需求1：定义一个v-big指令，和v-text功能类似，但会把绑定的数值放大10倍。
+        需求2：定义一个v-fbind指令，和v-bind功能类似，但可以让其所绑定的input元素默认获取焦点。
+     -->
+    <!-- 
+         自定义指令总结：
+            一、定义语法：
+                (1).局部指令：
+                    new Vue({															new Vue({
+                        directives:{指令名:配置对象}   或   		directives{指令名:回调函数}
+                    }) 																		})
+                (2).全局指令：
+                    Vue.directive(指令名,配置对象) 或   Vue.directive(指令名,回调函数)
+
+            二、配置对象中常用的3个回调：
+                (1).bind：指令与元素成功绑定时调用。
+                (2).inserted：指令所在元素被插入页面时调用。
+                (3).update：指令所在模板结构被重新解析时调用。
+
+            三、备注：
+                1.指令定义时不加v-，但使用时要加v-；
+                2.指令名如果是多个单词，要使用kebab-case命名方式，不要用camelCase命名。
+      -->
+    <div id="app">
+        <h3 v-big="n+2"></h3>
+        <input type="text" v-fbind:value="n">
+        <br>
+        <input type="text" v-fbind:value="n" v-bgc>
+        <br>
+        <button @click="n++">点我n+1</button>
+    </div>
+
+    <script>
+        // 全局配置自定义组件,使之更改第二个input框的颜色
+        // 当配置了全局自定义组件后，别的实例上也能用该组件
+        Vue.directive('bgc', {
+            bind(element, binding) {
+                console.log(element, binding);
+                element.className = "bgc"
+            },
+            inserted(element, binding) {
+
+            },
+            update(element, binding) {
+
+            }
+        })
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    n: 10,
+                }
+            },
+            directives: {
+                // 函数式写法
+                //big函数何时会被调用？
+                // 1.指令与元素成功绑定时（一上来）。
+                // 2.指令所在的模板被重新解析时。
+                big(element, binding) {
+                    element.innerText = binding.value * 10
+                },
+                // 对象式写法，内部有三个回调
+                    // (1)`bind`：指令与元素成功绑定时调用。
+                    // (2)`inserted`：指令所在元素被插入页面时调用。
+                    // (3)`update`：指令所在模板结构被重新解析时调用。
+                fbind: {
+                    bind(element, binding) {
+                        //指令与元素成功绑定时（一上来）
+                        element.value = binding.value
+                    },
+                    inserted(element, binding) {
+                        //指令所在元素被插入页面时
+                        element.focus()
+                    },
+                    update(element, binding) {
+                        //指令所在的模板被重新解析时
+                        element.value = binding.value
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
