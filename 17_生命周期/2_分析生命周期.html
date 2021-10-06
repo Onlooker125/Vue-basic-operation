@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2 v-text="str"></h2>
+        <h3>来个插值语法{{n}}</h3>
+        <button @click="add">n++</button>
+        <br>
+        <button @click="destroy">销毁vm</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    n: 1,
+                    str:"测试钩子函数"
+                }
+            },
+            methods: {
+                add(){
+                    this.n ++
+                },
+                destroy(){
+                    // 启动销毁
+                    this.$destroy()
+                }
+            },
+            // beforeCreate() 此时可以通过vm访问到data中的数据 和 methods中配置的方法
+            beforeCreate() {
+                console.log("pass beforeCreate");
+            },
+            // created() 此时可以通过vm访问到data中的数据 和 methods中配置的方法
+            created() {
+                console.log("pass created");
+            },
+            // beforeMount() 此时
+                // 页面呈现的是未经Vue编译的DOM结构
+                // 所有对DOM的操作，最终都不奏效
+            beforeMount() {
+                console.log("pass beforeMount");
+            },
+            // mounted() 此时
+                // 1.页面中呈现的是经过Vue编译的DOM
+                // 2.对DOM的操作均有效(但尽可能避免)。至此初始化过程结束
+                // 一般在此进行：开启定时器,发送网络请求,订阅信息,绑定自定义事件等初始化操作
+            mounted() {
+                console.log("pass mounted");
+            },       
+            // beforeUpdate() 此时数据是新的,但是页面上还是旧的.即页面尚未和数据保持同步
+            beforeUpdate() {
+                console.log("pass beforeUpdate");
+            },
+            // update() 此时数据是新的,页面上内容也是新的,即页面和数据已经保持同步
+            updated() {
+                console.log("pass update");
+            },
+            // beforeDestroy() 此时vm中所有的:data,methods,指令等等都处于可用状态,但马上就要执行销毁过程
+            // 一般在此阶段:关闭定时器,取消订阅消息,解绑自定义事件等收尾操作
+            beforeDestroy() {
+                console.log("vm即将销毁");
+            },
+            destroyed() {
+                console.log("vm已经销毁了,页面数据将保留但不在进行更新");
+            },
+        })
+    </script>
+</body>
+
+</html>
