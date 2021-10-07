@@ -1,5 +1,5 @@
  # 非单文件组件笔记
-官方文档 [https://cn.vuejs.org/v2/guide/components.html](https://cn.vuejs.org/v2/guide/components.html
+官方文档 https://cn.vuejs.org/v2/guide/components.html
 
 ### Vue中使用组件的三大步骤：
 
