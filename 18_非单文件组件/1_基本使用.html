@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/vue.js"></script>
+    <style>
+        #app {
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 style="text-align: center;">{{msg}}</h1>
+        <hr>
+        <!-- (局部注册)第三步：编写组件标签 -->
+        <msg1></msg1>
+        <msg1></msg1>
+        <!-- (全局注册)第三步：编写组件标签 -->
+        <msg2></msg2>
+        <msg2></msg2>
+    </div>
+
+    <script>
+        // (局部注册) 第一步：创建 msg1 组件
+        const msg1 = Vue.extend({
+            //组件定义时，一定不要写el配置项，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器。
+            template: `
+                <div>
+                    <h3>{{str}}</h3>
+                    <h4>num:{{num}}</h4>
+                    <button @click="grow">I'am so big</button>
+                    <hr>
+                </div>
+            `,
+            data() {
+                return {
+                    str:"我是局部组件 msg1",
+                    num: 0
+                }
+            },
+            methods: {
+                grow() {
+                    this.num++
+                }
+            },
+        })
+        // （全局注册）第一步：创建 msg2 组件
+        const msg2 = Vue.extend({
+            //组件定义时，一定不要写el配置项，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器。
+            template: `
+                <div>
+                    <h3>{{str}}</h3>
+                    <h4>num:{{num}}</h4>
+                    <button @click="grow">I'am so big</button>
+                    <hr>
+                </div>
+            `,
+            data() {
+                return {
+                    str:"我是全局组件 msg2",
+                    num: 0
+                }
+            },
+            methods: {
+                grow() {
+                    this.num++
+                }
+            },
+        })
+        // （全局注册）第二步：全局注册组件
+        // 注意全局注册的话，注册的时候必须在创建下面component
+        Vue.component('msg2',msg2)
+        // 创建vm实例
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg: "欢迎使用组件。这是非单文件组件DEMO，我是VM大哥",
+                }
+            },
+            // 全新配置项 components 用于局部注册组件
+            // （局部注册）第二步：注册组件
+            components: {
+                msg1
+            }
+        })
+    </script>
+</body>
+
+</html>
