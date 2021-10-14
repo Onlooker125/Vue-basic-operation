@@ -1,4 +1,20 @@
+## props配置项
 
+1. 功能：让组件接收外部传过来的数据
+
+2. 传递数据：```<Demo name="xxx"/>```
+
+3. 接收数据：
+
+    1. 第一种方式（只接收）：```props:['name'] ```
+
+    2. 第二种方式（限制类型）：```props:{name:String}```
+
+    3. 第三种方式（限制类型、限制必要性、指定默认值）：
+
+        ```js
+        props:{
+        	name:{
         	type:String, //类型
         	required:true, //必要性
         	default:'老王' //默认值
