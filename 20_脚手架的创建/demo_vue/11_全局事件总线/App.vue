@@ -14,7 +14,7 @@ import Demo3 from "./components/demo3.vue";
 export default {
   data() {
     return {
-      str: "组件自定义事件",
+      str: "全局事件总线",
     };
   },
   methods: {
