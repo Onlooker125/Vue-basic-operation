@@ -1,33 +1,21 @@
 <template>
-	<div id="root">
-		<button @click="getStudent">获取学生信息</button>
-	</div>
+  <div class="container">
+    <Search></Search>
+    <List></List>
+  </div>
 </template>
 
 <script>
-	import axios from 'axios';
-	export default {
-		name:'App',
-		data() {
-			return {
-
-			}
-		},
-		methods: {
-			getStudent(){
-				axios.get('http://localhost:8080/students').then(
-					response => {
-						console.log("请求成功了" ,response.data);
-					},
-					error => {
-						console.log("请求失败了" , error.message);
-					}
-				)
-			}
-		},
-	}
+import Search from './components/search.vue';
+import List from './components/list.vue';
+export default {
+  components: { Search,List },
+  name: "App",
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style>
-	
 </style>
