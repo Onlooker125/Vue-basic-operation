@@ -8,5 +8,9 @@ Vue.config.productionTip = false
 //创建vm
 new Vue({
 	el:'#app',
+	// 创建全局事件总线
+	beforeCreate() {
+		Vue.prototype.$bus=this
+	},
 	render: h => h(App)
 })
