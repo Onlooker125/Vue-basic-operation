@@ -55,6 +55,7 @@ export default {
       } else {
         this.$set(todo, "isEdit", true);
       }
+      // $nextTick()函数： Dom更新结束后执行回调函数，就是Dom更新结束后设置焦点
       this.$nextTick(function(){this.$refs.editFocus.focus()})
     },
     // 编辑输入框失去焦点回调
