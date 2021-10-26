@@ -4,7 +4,7 @@
 + 在`<slot></slot>` 中通过 `:game="games"`
   + 第一个`:game` 可以自定义
   + 第二个`games` 是需要传递的对象或者数组
-+ 别的组件接收时必须用`<template></template>` 来包裹，中间带着一个`slot-scope` 属性，值可以自定义
++ 别的组件接收时**必须用`<template></template>` 来包裹**，中间带着一个`slot-scope` 属性，值可以自定义
 + 传过来的是一个对象，**对象的键是上面定义的game**，值才是需要的内容
 ### 另
 + template 中 `scope` 属性是旧写法，新写法是 `slot-scope`
