@@ -24,6 +24,7 @@ export default {
     };
   },
   methods: {
+    // 搜索按钮
     searchUsers() {
       //   请求之前发送数据
       this.$bus.$emit("updateListData", {
@@ -32,7 +33,7 @@ export default {
         errMsg: "",
         users: [],
       });
-      //   请求到数据之后
+      // 请求到数据之后
       axios.get(`https://api.github.com/search/users?q=${this.keyWord}`).then(
         (response) => {
           // 数据请求成功
@@ -55,7 +56,6 @@ export default {
       //   console.log(this.keyWord);
     },
   },
-  mounted() {},
 };
 </script>
 
