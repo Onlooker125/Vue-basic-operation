@@ -23,17 +23,18 @@ export default {
   data() {
     return {
       info: {
-        isFirst: true,
-        isLoading: false,
-        errMsg: "",
-        users: [],
+        isFirst: true,        //是否第一次打开，第一次打开显示欢迎
+        isLoading: false,     //加载状态
+        errMsg: "",           //错误信息
+        users: [],            //接口上返回的用户数据
       },
     };
   },
   mounted() {
+    // 通过全局事件总线传递数据
     this.$bus.$on("updateListData", (userObj) => {
         this.info = {...this.info,...userObj}
-      console.log("我拿到search的数据了", this.users);
+      // console.log("我拿到search的数据了", this.users);
     });
   },
 };
