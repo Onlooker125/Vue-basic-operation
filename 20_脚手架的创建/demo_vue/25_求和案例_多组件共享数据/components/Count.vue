@@ -5,6 +5,7 @@
     <br />
     <h4>Demo: {{ test1 }} --- {{ test2 }}</h4>
     <h4>Demo: {{ test3 }}</h4>
+    <h4 style="color:red">我是persons组件学生的个数：{{personList.length}}</h4>
     <br />
     <select v-model.number="n">
       <option value="1">1</option>
@@ -28,40 +29,14 @@ export default {
     };
   },
   methods: {
-    // 程序员自己写方法;直接和mutations对话
-    // increment() {
-    //   this.$store.commit("INCREMENT", this.n);
-    // },
-    // decrement() {
-    //   this.$store.commit("DECREMENT", this.n);
-    // },
     // 借助mapMutations生成对应的方法,方法中会调用commit去联系mutations(对象写法)
-    ...mapMutations({ increment: "INCREMENT", decrement: "DECREMENT" }),
-    // 借助mapMutations生成对应的方法,方法中会调用commit去联系mutations(数组写法)
-    // ...mapMutations(['INCREMENT','DECREMENT'])
-    // *********************************************************************************************************
-    // // 程序员自己写方法;通过actions和mutations对话
-    // incrementOdd() {
-    //   this.$store.dispatch("incrementOdd", this.n);
-    // },
-    // incrementWait() {
-    //   this.$store.dispatch("incrementWait", this.n);
-    // },
-    // 借助mapActions生成对应的方法,方法中会调用dispatch去联系Actions(对象写法)
-    // ...mapActions({incrementOdd:'incrementOdd',incrementWait:'incrementWait'})
+    ...mapMutations({ increment: "INCREMENT", decrement: "DECREMENT"}),
     // 借助mapActions生成对应的方法,方法中会调用dispatch去联系Actions(数组写法)
     ...mapActions(['incrementOdd','incrementWait'])
   },
   computed: {
-    // 靠mapState生成计算属性，从state中读取数据(第一种：对象写法)
-    // ...mapState({sum:'sum',test1:'test1',test2:'test2'})
-
     // 靠mapState生成计算属性，从state中读取数据(第一种：数组写法)
-    ...mapState(["sum", "test1", "test2"]),
-    // ******************************************************************************************************
-    // 靠mapGetters生成计算属性，从state中读取数据(第一种：对象写法)
-    // ...mapGetters({ bigSum: "bigSum" }),
-
+    ...mapState(["sum", "test1", "test2","personList" ]),
     // 靠mapGetters生成计算属性，从state中读取数据(第一种：数组写法)
     ...mapGetters(["bigSum", "test3"]),
   },

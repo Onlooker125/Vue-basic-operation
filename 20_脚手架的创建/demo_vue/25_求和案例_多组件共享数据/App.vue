@@ -12,8 +12,7 @@ import Persons from './components/persons.vue';
 export default {
   name: "App",
   components: {
-    Count,
-    Persons
+    Count,Persons
   },
   data() {
     return {};

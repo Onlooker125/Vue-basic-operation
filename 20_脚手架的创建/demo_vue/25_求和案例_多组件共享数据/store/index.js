@@ -14,9 +14,9 @@ const actions = {
             context.commit('INCREMENT', value)
         }
     },
-    incrementWait(context,value){
+    incrementWait(context, value) {
         setTimeout(() => {
-            context.commit('INCREMENT',value)
+            context.commit('INCREMENT', value)
         }, 500);
     }
 }
@@ -27,14 +27,32 @@ const mutations = {
     },
     DECREMENT(state, value) {
         state.sum -= value
+    },
+    PERSONLIST(state,value){
+        state.personList.unshift(value)
     }
 }
 // 准备state对象 -- 保存具体的数据
 const state = {
     sum: 0,
+    test1:'我测试mapState',
+    test2:'我也测试mapState',
+    personList:[
+        {id:'001',name:'张三'}
+    ]
+}
+// 准备getters对象 -- 相当于vue中的Computed计算属性，创建完之后记得导出(暴露)
+const getters = {
+    // 有个形参 是state
+    bigSum(state) {
+        return state.sum * 10
+    },
+    test3(state){
+        return state.test2 = '我测试mapGetters'
+    }
 }
 
 // 创建并暴露store
 export default new Vuex.Store({
-    actions, mutations, state
+    actions, mutations, state, getters
 })
