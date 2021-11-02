@@ -50,14 +50,14 @@ export default {
     // ES6写法，将...后面的对象展开，对象写法必须写成键值对形式不能简写,键是函数名,值是state中的值
     // ...mapState({sum:'sum',test1:'test1',test2:'test2'})
 
-    // 靠mapState生成计算属性，从state中读取数据(第一种：数组写法)
+    // 靠mapState生成计算属性，从state中读取数据(第二种：数组写法)
     // 数组写法一个值两个用:属性名和读取出来的名是一致的才能用数组写法
     ...mapState(["test1","test2"]),
 // *********************************************************************************************************
     // 靠mapGetters生成计算属性，从state中读取数据(第一种：对象写法)
     // ...mapGetters({ bigSum: "bigSum" }),
     
-    // 靠mapGetters生成计算属性，从state中读取数据(第一种：数组写法)
+    // 靠mapGetters生成计算属性，从state中读取数据(第二种：数组写法)
     ...mapGetters(["bigSum","test3"]),
   },
   mounted() {

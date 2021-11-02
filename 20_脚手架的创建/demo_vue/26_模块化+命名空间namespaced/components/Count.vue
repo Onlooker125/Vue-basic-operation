@@ -30,13 +30,37 @@ export default {
   },
   methods: {
     // 引用到命名空间namespaced
-    ...mapMutations('countAbout',{ increment: "INCREMENT", decrement: "DECREMENT"}),
-    ...mapActions('countAbout',['incrementOdd','incrementWait'])
+    // Mutations命名空间 简写
+    decrement(){
+      this.$store.commit('countAbout/DECREMENT',this.n)
+    },
+    // Mutations命名空间 简写形式
+    ...mapMutations('countAbout',{ increment: "INCREMENT"}),
+
+    // Actions命名空间 原生写法
+    incrementOdd(){
+      this.$store.dispatch('countAbout/incrementOdd',this.n)
+    },
+    // Actions命名空间 mapActions写法
+    ...mapActions('countAbout',['incrementWait'])
   },
   computed: {
     ...mapState('countAbout',["sum", "test1", "test2" ]),
-    ...mapState('personAbout',["personList"]),
-    ...mapGetters('countAbout',["bigSum", "test3"]),
+    // state命名空间 原生写法
+    personList(){
+      return this.$store.state.personAbout.personList
+    },
+    // state命名空间 mapState写法
+    // ...mapState('personAbout',["personList"]),
+
+    // getters命名空间 原生写法
+    bigSum(){
+      return this.$store.getters['countAbout/bigSum']
+    },
+    // getters命名空间 mapGetters写法
+    ...mapGetters('countAbout',["test3"]),
+    
+    
   },
   mounted() {
     console.log(this.$store);
