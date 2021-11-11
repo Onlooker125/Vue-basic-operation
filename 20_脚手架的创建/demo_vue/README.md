@@ -783,8 +783,10 @@ module.exports = {
 1. 传递参数
 
    ```vue
-   <!-- 跳转并携带query参数，to的字符串写法 -->
+   <!-- 跳转并携带query参数，to的字符串写法  -->
    <router-link :to="/home/message/detail?id=666&title=你好">跳转</router-link>
+      <!-- 传递data中的数据,使用ES6 的模板语法 -->
+      <router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`">跳转</router-link>
    				
    <!-- 跳转并携带query参数，to的对象写法 -->
    <router-link 
@@ -792,7 +794,8 @@ module.exports = {
    		path:'/home/message/detail',
    		query:{
    		   id:666,
-               title:'你好'
+            title:'你好'，
+            dataId:m.id
    		}
    	}"
    >跳转</router-link>
@@ -823,7 +826,7 @@ module.exports = {
       			component:Test,
       			children:[
       				{
-                            name:'hello' //给路由命名
+                     name:'hello' //给路由命名
       					path:'welcome',
       					component:Hello,
       				}
@@ -899,7 +902,7 @@ module.exports = {
    >跳转</router-link>
    ```
 
-   > 特别注意：路由携带params参数时，若使用to的对象写法，则不能使用path配置项，必须使用name配置！
+   > **<store style="color:red">特别注意</store>**：路由携带params参数时，若使用to的对象写法，则不能使用path配置项，必须使用name配置！
 
 3. 接收参数：
 
@@ -910,7 +913,7 @@ module.exports = {
 
 ### 7.路由的props配置
 
-​	作用：让路由组件更方便的收到参数
+​	作用：让 **路由组件** 更方便的收到参数
 
 ```js
 {
@@ -919,18 +922,22 @@ module.exports = {
 	component:Detail,
 
 	//第一种写法：props值为对象，该对象中所有的key-value的组合最终都会通过props传给Detail组件
-	// props:{a:900}
+	// props:{a:900,b:'hello'}
 
-	//第二种写法：props值为布尔值，布尔值为true，则把路由收到的所有params参数通过props传给Detail组件
+	//第二种写法：props值为布尔值，布尔值为true，则把路由收到的所有params参数通过props传给Detail组件,需搭配params传参
 	// props:true
 	
 	//第三种写法：props值为函数，该函数返回的对象中每一组key-value都会通过props传给Detail组件
-	props(route){
+	props($route){
 		return {
 			id:route.query.id,
 			title:route.query.title
 		}
 	}
+   //第三种写法的解构赋值写法
+   props({query:{id,title}}){
+      return {id,title}
+   }
 }
 ```
 

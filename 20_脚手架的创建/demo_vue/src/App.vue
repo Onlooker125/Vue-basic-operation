@@ -1,19 +1,19 @@
 <template>
   <div class="app">
     <Count></Count>
-    <hr>
+    <hr />
     <Persons></Persons>
   </div>
 </template>
 
 <script>
 import Count from "./components/Count.vue";
-import Persons from './components/persons.vue';
+import Persons from "./components/persons.vue";
 export default {
   name: "App",
   components: {
     Count,
-    Persons
+    Persons,
   },
   data() {
     return {};
@@ -21,8 +21,7 @@ export default {
 };
 </script>
 <style lang="css">
-.app{
-  margin:10px 30px
+.app {
+  margin: 10px 30px;
 }
-  
 </style>
