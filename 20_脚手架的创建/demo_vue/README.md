@@ -783,10 +783,13 @@ module.exports = {
 1. 传递参数
 
    ```vue
-   <!-- 跳转并携带query参数，to的字符串写法  -->
+   跳转到detail页签，并携带参数
+
+   <!-- 跳转并携带query参数，to的字符串写法。固定数据  -->
    <router-link :to="/home/message/detail?id=666&title=你好">跳转</router-link>
-      <!-- 传递data中的数据,使用ES6 的模板语法 -->
-      <router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`">跳转</router-link>
+
+   <!-- 跳转并携带query参数，to的字符串写法。传递data中的数据，需要用到ES6语法  -->
+   <router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`">跳转</router-link>
    				
    <!-- 跳转并携带query参数，to的对象写法 -->
    <router-link 
@@ -794,8 +797,8 @@ module.exports = {
    		path:'/home/message/detail',
    		query:{
    		   id:666,
-            title:'你好'，
-            dataId:m.id
+   		   title:'你好',
+   		   dataId:m.id
    		}
    	}"
    >跳转</router-link>
@@ -896,7 +899,7 @@ module.exports = {
    		name:'xiangqing',
    		params:{
    		   id:666,
-               title:'你好'
+   		   title:'你好'            
    		}
    	}"
    >跳转</router-link>
@@ -941,10 +944,10 @@ module.exports = {
 }
 ```
 
-### 8.```<router-link>```的replace属性
+### 8.```<router-link>```的replace属性(历史记录模式)
 
 1. 作用：控制路由跳转时操作浏览器历史记录的模式
-2. 浏览器的历史记录有两种写入方式：分别为```push```和```replace```，```push```是追加历史记录，```replace```是替换当前记录。路由跳转时候默认为```push```
+2. 浏览器的历史记录有两种写入方式：分别为```push```和```replace```，```push```是追加历史记录(往栈顶添加历史记录)，```replace```是替换当前记录(栈顶历史记录)。路由跳转时候默认为```push```
 3. 如何开启```replace```模式：```<router-link replace .......>News</router-link>```
 
 ### 9.编程式路由导航
@@ -977,15 +980,22 @@ module.exports = {
 
 ### 10.缓存路由组件
 
-1. 作用：让不展示的路由组件保持挂载，不被销毁。
+1. 作用：路由组件离开时会执行销毁，同时页面输入框等内容也会随之销毁。缓存路由组件就是让不展示的路由组件保持挂载，不被销毁。即跳转页面内容也不消失
 
 2. 具体编码：
 
    ```vue
+   <!-- 缓存一个 -->
    <keep-alive include="News"> 
        <router-view></router-view>
    </keep-alive>
+   
+   <!-- 缓存多个,用数组 -->
+   <keep-alive :include="['one','two']">
+      <router-view></router-view>
+   </keep-alive>
    ```
+3.`include` 属性用于指定包含哪个组件。只有被包含的组件才会被缓存,他的值是**组件名name**
 
 ### 11.两个新的生命周期钩子
 
