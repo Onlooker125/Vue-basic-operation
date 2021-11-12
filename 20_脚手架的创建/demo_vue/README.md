@@ -977,7 +977,7 @@ module.exports = {
    this.$router.back() //后退
    this.$router.go() //可前进也可后退
    ```
-
+   
 ### 10.缓存路由组件
 
 1. 作用：路由组件离开时会执行销毁，同时页面输入框等内容也会随之销毁。缓存路由组件就是让不展示的路由组件保持挂载，不被销毁。即跳转页面内容也不消失
@@ -1003,6 +1003,7 @@ module.exports = {
 2. 具体名字：
    1. ```activated```路由组件被激活时触发。
    2. ```deactivated```路由组件失活时触发。
+3. 和组件的mounted、beforeDestroy区别：mounted和beforeDestroy适用于组件，activated和deactivated适用于路由组件
 
 ### 12.路由守卫
 
